@@ -1,0 +1,34 @@
+<div ng-controller="listCtrl" class="row">
+    <div class="col-md-9 col-md-offset-2">
+        <table class="table  table-condensed">
+            <thead>
+            <th>
+                姓名
+            </th>
+            <th>
+                年龄
+            </th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in pager.data">
+                <td>
+                    {{user.name}}
+                </td>
+                <td>
+                    {{user.age}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-offset-4">
+                <ul uib-pagination total-items="pager.totalItems" ng-change="pageChanged()"
+                    items-per-page="pager.numPerPage" ng-model="pager.currentPage"
+                    max-size="6" class="pagination-sm" boundary-links="true" num-pages="numPages" first-text="首页"
+                    last-text="末页" previous-text="上一页" next-text="下一页">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

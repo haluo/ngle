@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="utf-8"/>
+	<title>Service App</title>
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body ng-controller="ApplicationController">
+//登陆弹出框
+<script login-show type="text/ng-template" id="myModalContent.html" >
+	<!--<div ng-include="'tpls/login.html'"></div>-->
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">请登录</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-md-9 col-md-offset-2">
+				<form ng-submit="login()">
+					<div class="row">
+						<input type="text" ng-model="user.name">
+					</div>
+					<div class="row">
+						<input type="password" ng-model="user.passwd">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+
+<div >
+	<ul >
+		<li><a ui-sref="home">home</a></li>
+		<li><a ui-sref="list">列表</a></li>
+		<li><a ui-sref="login">登陆</a></li>
+	</ul>
+	<hr class="" />
+	<div ui-view=""></div>
+</div>
+
+<!-外部依赖->
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/angular-cookies/angular-cookies.min.js"></script>
+<script src="lib/angular-messages/angular-messages.min.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<!-内部依赖->
+<script src="js/app.js"></script>
+<script src="js/controllers/MyCtrl.js"></script>
+<script src="js/services/MyService.js"></script>
+<script src="js/directives/MyDirective.js"></script>
+</body>
+</html>
