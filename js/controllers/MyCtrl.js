@@ -16,11 +16,29 @@ app.controller("ApplicationController",function($scope,USER_ROLES,loginService,$
     //$scope.setCurrentUser = function (user) {
     //    $scope.currentUser = user;
     //};
-
+    //$scope.ok = function ok() {
+    //    $scope.$modalInstance.close();
+    //    //$log.log("1111");
+    //};
+    //
+    //$scope.cancel = function cancel() {
+    //    $scope.$modalInstance.dismiss('cancel');
+    //};
 
 });
 
-
+app.controller('LoginModalCtrl',function($scope,$uibModalInstance){
+    $scope.user={
+        name:'',
+        passwd:''
+    };
+    $scope.ok = function(){
+        $uibModalInstance.close($scope.user); //关闭并返回当前选项
+    };
+    $scope.cancel = function(){
+        $uibModalInstance.dismiss('cancel'); // 退出
+    }
+});
 
 
 app.controller("homeCtrl",function($scope,$log,$cookieStore,$state){
