@@ -54,7 +54,8 @@ service.service('Session', function () {
 service.factory("loginService",function($http,Session){
     return {
         login : function(user){
-            return $http.post("/login",user);
+            //todo  return $http.post("/login",user);
+            Session.create("1","1","guest")
         },
         isLogin :function(){
             return !!Session.userId;

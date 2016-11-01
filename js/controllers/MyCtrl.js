@@ -9,31 +9,12 @@ var app = angular.module("myApp.myCtrl",[]);
 
 //全局 防止污染rootscope
 app.controller("ApplicationController",function($scope,USER_ROLES,loginService,$uibModal){
-    //$scope.currentUser = null;
-    //$scope.userRoles = USER_ROLES;
-    //$scope.isAuthorized = loginService.isAuthorized;
-    //
-    //$scope.setCurrentUser = function (user) {
-    //    $scope.currentUser = user;
-    //};
-    //$scope.ok = function ok() {
-    //    $scope.$modalInstance.close();
-    //    //$log.log("1111");
-    //};
-    //
-    //$scope.cancel = function cancel() {
-    //    $scope.$modalInstance.dismiss('cancel');
-    //};
 
 });
 
-app.controller('LoginModalCtrl',function($scope,$uibModalInstance){
-    $scope.user={
-        name:'',
-        passwd:''
-    };
-    $scope.ok = function(){
-        $uibModalInstance.close($scope.user); //关闭并返回当前选项
+app.controller('loginModalCtrl',function($scope,$uibModalInstance){
+    $scope.ok = function(user){
+        $uibModalInstance.close(user); //关闭并返回当前选项
     };
     $scope.cancel = function(){
         $uibModalInstance.dismiss('cancel'); // 退出
@@ -41,15 +22,8 @@ app.controller('LoginModalCtrl',function($scope,$uibModalInstance){
 });
 
 
-app.controller("homeCtrl",function($scope,$log,$cookieStore,$state){
-    $scope.user = {};
-    $scope.user.name = $cookieStore.get("cname");
-    $log.log("---->"+$scope.user.name);
-    $scope.logOut = function(){
-        $scope.user = {};
-        $cookieStore.remove("cname");
-        $state.go("home");
-    }
+app.controller("homeCtrl",function(){
+
 });
 app.controller("listCtrl",function($scope,$log,listService){
 

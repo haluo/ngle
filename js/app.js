@@ -4,24 +4,25 @@ var myApp = angular.module('myApp',['ui.router','ngCookies','ui.bootstrap','myAp
 myApp.run(function($rootScope, AUTH_EVENTS, loginService){
     //路由改变时验证用户权限
     $rootScope.$on('$stateChangeStart', function (event, next ) {
-        if(next.data){
+        if(next && next.data){
+            console.log("~~~~~~~~~~");
             var authorizedRoles = next.data.authorizedRoles;
             if (!loginService.isAuthorized(authorizedRoles)) {
+                $rootScope.nextUrl = next.name;
                 event.preventDefault();
-                if (loginService.isLogin()) {
+                if (!loginService.isLogin()) {
                     $rootScope.$broadcast(AUTH_EVENTS.notLogin);
                 } else {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                 }
             }
         }
-
     });
 });
 
 
 myApp.config(['$stateProvider','$urlRouterProvider','USER_ROLES',function($stateProvider,$urlRouterProvider,USER_ROLES) {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/list');
 	$stateProvider.state(
         {
             name: 'home',

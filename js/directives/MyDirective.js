@@ -22,7 +22,7 @@ var myDirective  = angular.module("myApp.myDirective",[]);
 //    };
 //});
 
-myDirective.directive('loginShow',function($uibModal,AUTH_EVENTS,loginService){
+myDirective.directive('loginShow',function($rootScope,$state,$uibModal,AUTH_EVENTS,loginService){
    return {
        restrict: 'AE',
        templateUrl:'js/directives/tpls/login.html',
@@ -34,21 +34,19 @@ myDirective.directive('loginShow',function($uibModal,AUTH_EVENTS,loginService){
                    ariaLabelledBy: 'modal-title',
                    ariaDescribedBy: 'modal-body',
                    templateUrl: 'myModalContent.html',
-                   controller : 'LoginModalCtrl',
+                   controller : 'loginModalCtrl',
                    size:'sm'
-
                });
 
                modalInstance.result.then(function (user) {
                    //$ctrl.selected = selectedItem;
                    console.log("login in user :"+(user.name)+" pass:"+(user.passwd));
                    loginService.login(user);
+                   $state.go($rootScope.nextUrl);
                }, function () {
                    console.log("login show 2");
                });
            };
-           $scope.$on(AUTH_EVENTS.notAuthenticated, showLogin);
-           $scope.$on(AUTH_EVENTS.sessionTimeout, showLogin);
            $scope.$on(AUTH_EVENTS.notLogin, showLogin);
        }
    }
