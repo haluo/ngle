@@ -27,7 +27,7 @@ myDirective.directive('loginShow',function($rootScope,$state,$uibModal,AUTH_EVEN
        restrict: 'AE',
        templateUrl:'js/directives/tpls/login.html',
        link:function($scope){
-           var showLogin = function(){
+           var showLogin = function(event,data){
                var modalInstance = $uibModal.open({
                    animation: true,
                    ariaLabelledBy: 'modal-title',
@@ -39,9 +39,9 @@ myDirective.directive('loginShow',function($rootScope,$state,$uibModal,AUTH_EVEN
 
                modalInstance.result.then(function (user) {
                    //$ctrl.selected = selectedItem;
-                   console.log("login in user :"+(user.name)+" pass:"+(user.passwd));
+                   console.log("login in user :"+(user.name)+" pass:"+(user.passwd)+" dara:"+data);
                    loginService.login(user);
-                   $state.go($rootScope.nextUrl);
+                   $state.go(data);
                }, function () {
                    console.log("login show 2");
                });

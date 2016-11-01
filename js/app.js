@@ -1,19 +1,18 @@
 "use strict";
-var myApp = angular.module('myApp',['ui.router','ngCookies','ui.bootstrap','myApp.myCtrl','myApp.myService','myApp.myDirective']);
+var myApp = angular.module('myApp', ['ui.router', 'ngCookies', 'ui.bootstrap', 'myApp.myCtrl', 'myApp.myService', 'myApp.myDirective']);
 
-myApp.run(function($rootScope, AUTH_EVENTS, loginService){
+myApp.run(function ($rootScope, AUTH_EVENTS, loginService) {
     //路由改变时验证用户权限
-    $rootScope.$on('$stateChangeStart', function (event, next ) {
-        if(next && next.data){
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+        if (next && next.data) {
             console.log("~~~~~~~~~~");
             var authorizedRoles = next.data.authorizedRoles;
             if (!loginService.isAuthorized(authorizedRoles)) {
-                $rootScope.nextUrl = next.name;
                 event.preventDefault();
                 if (!loginService.isLogin()) {
-                    $rootScope.$broadcast(AUTH_EVENTS.notLogin);
+                    $rootScope.$broadcast(AUTH_EVENTS.notLogin,next.name);
                 } else {
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated,next.name);
                 }
             }
         }
@@ -21,28 +20,25 @@ myApp.run(function($rootScope, AUTH_EVENTS, loginService){
 });
 
 
-myApp.config(['$stateProvider','$urlRouterProvider','USER_ROLES',function($stateProvider,$urlRouterProvider,USER_ROLES) {
+myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($stateProvider, $urlRouterProvider, USER_ROLES) {
     $urlRouterProvider.otherwise('/list');
-	$stateProvider.state(
+    $stateProvider.state('home',
         {
-            name: 'home',
             url: '/home',
-            controller:'homeCtrl',
+            controller: 'homeCtrl',
             templateUrl: 'tpls/home.html',
             data: {
-                authorizedRoles: [USER_ROLES.admin,USER_ROLES.editor]
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         }
-    ).state({
-        name: 'list',
+    ).state('list', {
         url: '/list',
-        controller:'listCtrl',
+        controller: 'listCtrl',
         templateUrl: 'tpls/list.html'
-    }).state(
+    }).state('login',
         {
-            name: 'login',
             url: '/login',
-            controller:'loginCtrl',
+            controller: 'loginCtrl',
             templateUrl: 'tpls/login.html'
         }
     )
