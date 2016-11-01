@@ -41,7 +41,6 @@ myDirective.directive('loginShow',function($rootScope,$state,$uibModal,AUTH_EVEN
                    //$ctrl.selected = selectedItem;
                    console.log("login in user :"+(user.name)+" pass:"+(user.passwd));
                    loginService.login(user);
-                   $scope.setCurrentUser(user);
                    $state.go($rootScope.nextUrl);
                }, function () {
                    console.log("login show 2");

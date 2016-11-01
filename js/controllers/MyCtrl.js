@@ -9,12 +9,11 @@ var app = angular.module("myApp.myCtrl",[]);
 
 //全局 防止污染rootscope
 app.controller("ApplicationController",function($scope,USER_ROLES,loginService){
-    $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
-
     $scope.isAuthorized = loginService.isAuthorized;
     $scope.isLogin = loginService.isLogin;
     $scope.getCurrentUser = loginService.getCurrentUser;
+    $scope.logout = loginService.logout;
 });
 
 app.controller('loginModalCtrl',function($scope,$uibModalInstance){

@@ -71,11 +71,10 @@ service.service('Session', function () {
 //    }
 //});
 
-service.factory("loginService",function($http,$cookieStore){
+service.factory("loginService",function($http,$cookieStore,$state){
     return {
         login : function(user){
             //todo  return $http.post("/login",user);
-            //Session.create("1","1","admin")
             $cookieStore.put('Session',{
                 id:'1',
                 userId:'1',
@@ -101,6 +100,10 @@ service.factory("loginService",function($http,$cookieStore){
         getCurrentUser:function(){
             var Session = $cookieStore.get("Session");
             return Session;
+        },
+        logout:function(){
+            $cookieStore.remove("Session");
+            $state.go("list")
         }
     }
 });
