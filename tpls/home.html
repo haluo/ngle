@@ -1,4 +1,4 @@
 <div>
     <span>home</span>
-    hi {{currentUser.name}} !  <span ng-if="isAuthorized(userRoles.admin)">You're admin.</span>  <span ng-if="isAuthorized(userRoles.guest)">You're guest.</span>
+    hi {{getCurrentUser().id}} !  <span ng-if="isAuthorized(userRoles.admin)">You're admin.</span>  <span ng-if="isAuthorized(userRoles.guest)">You're guest.</span>
 </div>

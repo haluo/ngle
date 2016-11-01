@@ -51,22 +51,56 @@ service.service('Session', function () {
     return this;
 });
 
-service.factory("loginService",function($http,Session){
+//service.factory("loginService",function($http,Session){
+//    return {
+//        login : function(user){
+//            //todo  return $http.post("/login",user);
+//            Session.create("1","1","admin")
+//        },
+//        isLogin :function(){
+//            return !!Session.userId;
+//        },
+//        //判断用户是否有访问某功能的权限  authorizedRoles 为访问某功能所需要的权限列表
+//        isAuthorized:function (authorizedRoles) {
+//            if (!angular.isArray(authorizedRoles)) {
+//                authorizedRoles = [authorizedRoles];
+//            }
+//            return (this.isLogin() &&
+//            authorizedRoles.indexOf(Session.userRole) !== -1);
+//        }
+//    }
+//});
+
+service.factory("loginService",function($http,$cookieStore){
     return {
         login : function(user){
             //todo  return $http.post("/login",user);
-            Session.create("1","1","admin")
+            //Session.create("1","1","admin")
+            $cookieStore.put('Session',{
+                id:'1',
+                userId:'1',
+                userRole:'admin'
+            });
         },
         isLogin :function(){
+            var Session = $cookieStore.get("Session");
+            if(!Session) return false;
             return !!Session.userId;
         },
         //判断用户是否有访问某功能的权限  authorizedRoles 为访问某功能所需要的权限列表
         isAuthorized:function (authorizedRoles) {
+            var Session = $cookieStore.get("Session");
+            if(!Session) return false;
+
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
             return (this.isLogin() &&
             authorizedRoles.indexOf(Session.userRole) !== -1);
+        },
+        getCurrentUser:function(){
+            var Session = $cookieStore.get("Session");
+            return Session;
         }
     }
 });

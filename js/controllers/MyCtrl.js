@@ -14,10 +14,7 @@ app.controller("ApplicationController",function($scope,USER_ROLES,loginService){
 
     $scope.isAuthorized = loginService.isAuthorized;
     $scope.isLogin = loginService.isLogin;
-
-    $scope.setCurrentUser = function (user) {
-        $scope.currentUser = user;
-    };
+    $scope.getCurrentUser = loginService.getCurrentUser;
 });
 
 app.controller('loginModalCtrl',function($scope,$uibModalInstance){
