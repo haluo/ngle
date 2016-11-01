@@ -8,12 +8,15 @@ var app = angular.module("myApp.myCtrl",[]);
 
 
 //全局 防止污染rootscope
-app.controller("ApplicationController",function($scope,USER_ROLES,loginService){
+app.controller("ApplicationController",function($scope,USER_ROLES,loginService,$location){
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = loginService.isAuthorized;
     $scope.isLogin = loginService.isLogin;
     $scope.getCurrentUser = loginService.getCurrentUser;
     $scope.logout = loginService.logout;
+    $scope.urlActive = function (url){
+        return url === $location.path();
+    }
 });
 
 app.controller('loginModalCtrl',function($scope,$uibModalInstance){

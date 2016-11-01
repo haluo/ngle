@@ -9,13 +9,17 @@
 <body ng-controller="ApplicationController">
 <login-show></login-show>
 <div >
-	<ul >
-		<li><a ui-sref="home">home</a></li>
-		<li><a ui-sref="list">列表</a></li>
-		<li><a ui-sref="login">登陆</a></li>
-	</ul>
 	<hr class="" />
-	<div ui-view=""></div>
+	<div class="row">
+		<div class="col-md-2">
+			<div class="list-group">
+				<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/home')}">home</a>
+				<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/list')}">列表</a>
+				<a ui-sref="login" class="list-group-item" ng-class="{active:urlActive('/login')}">登录</a>
+			</div>
+		</div>
+		<div ui-view=""></div>
+	</div>
 </div>
 
 <!-外部依赖->
