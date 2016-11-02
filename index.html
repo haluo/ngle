@@ -25,6 +25,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<p ng-show="isLogin()" class="navbar-text">hi ~ {{getCurrentUser().id}}</p>
 				<li><a ng-show="!isLogin()" ng-click="login()">登陆</a></li>
+				<li><a ng-show="!isLogin()" ng-sref="reg">注册</a></li>
 				<li><a ng-show="isLogin()" ng-click="logout()">退出</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
@@ -38,7 +39,7 @@
 			<div class="list-group">
 				<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/home')}">home</a>
 				<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/list')}">列表</a>
-				<a ui-sref="login" class="list-group-item" ng-class="{active:urlActive('/login')}">登录</a>
+				<a ui-sref="chart" class="list-group-item" ng-class="{active:urlActive('/chart')}">图表</a>
 			</div>
 		</div>
 		<div ui-view=""></div>
@@ -51,6 +52,8 @@
 <script src="lib/angular-messages/angular-messages.min.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="lib/highcharts/highcharts.js"></script>
+<script src="lib/highcharts-ng/dist/highcharts-ng.js"></script>
 
 <!-内部依赖->
 <script src="js/app.js"></script>

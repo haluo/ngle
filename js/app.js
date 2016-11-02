@@ -1,5 +1,5 @@
 "use strict";
-var myApp = angular.module('myApp', ['ui.router', 'ngCookies', 'ui.bootstrap', 'myApp.myCtrl', 'myApp.myService', 'myApp.myDirective']);
+var myApp = angular.module('myApp', ['ui.router', 'ngCookies', 'ui.bootstrap','highcharts-ng','myApp.myCtrl', 'myApp.myService', 'myApp.myDirective']);
 
 myApp.run(function ($rootScope, AUTH_EVENTS, loginService) {
     //路由改变时验证用户权限
@@ -35,11 +35,11 @@ myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($s
         url: '/list',
         controller: 'listCtrl',
         templateUrl: 'tpls/list.html'
-    }).state('login',
+    }).state('chart',
         {
-            url: '/login',
-            controller: 'loginCtrl',
-            templateUrl: 'tpls/login.html'
+            url: '/chart',
+            controller: 'chartCtrl',
+            templateUrl: 'tpls/chart.html'
         }
     )
 }]);
