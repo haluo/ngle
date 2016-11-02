@@ -8,7 +8,7 @@ var app = angular.module("myApp.myCtrl",[]);
 
 
 //全局 防止污染rootscope
-app.controller("ApplicationController",function($scope,USER_ROLES,loginService,$location){
+app.controller("ApplicationController",function($scope,USER_ROLES,AUTH_EVENTS,loginService,$location){
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = loginService.isAuthorized;
     $scope.isLogin = loginService.isLogin;
@@ -16,6 +16,9 @@ app.controller("ApplicationController",function($scope,USER_ROLES,loginService,$
     $scope.logout = loginService.logout;
     $scope.urlActive = function (url){
         return url === $location.path();
+    }
+    $scope.login = function(){
+        $scope.$broadcast(AUTH_EVENTS.notLogin,"list")
     }
 });
 
