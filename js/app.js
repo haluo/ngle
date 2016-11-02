@@ -1,11 +1,21 @@
 "use strict";
 var myApp = angular.module('myApp', ['ui.router', 'ngCookies', 'ui.bootstrap','highcharts-ng','myApp.myCtrl', 'myApp.myService', 'myApp.myDirective']);
 
-myApp.run(function ($rootScope, AUTH_EVENTS, loginService) {
+myApp.run(function ($rootScope, AUTH_EVENTS,MENUS, loginService) {
     //路由改变时验证用户权限
-    $rootScope.$on('$stateChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function (event, next){
+        if(next){
+            var url = next.url;
+            for(var key in MENUS){
+                console.log(key);
+                if(url.indexOf(key)!=-1){
+                    MENUS[key].isOpen = true;
+                }else {
+                    MENUS[key].isOpen = false;
+                }
+            }
+        }
         if (next && next.data) {
-            console.log("~~~~~~~~~~");
             var authorizedRoles = next.data.authorizedRoles;
             if (!loginService.isAuthorized(authorizedRoles)) {
                 event.preventDefault();
@@ -21,10 +31,10 @@ myApp.run(function ($rootScope, AUTH_EVENTS, loginService) {
 
 
 myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($stateProvider, $urlRouterProvider, USER_ROLES) {
-    $urlRouterProvider.otherwise('/list');
+    $urlRouterProvider.otherwise('/base/list');
     $stateProvider.state('home',
         {
-            url: '/home',
+            url: '/base/home',
             controller: 'homeCtrl',
             templateUrl: 'tpls/home.html',
             data: {
@@ -32,14 +42,24 @@ myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($s
             }
         }
     ).state('list', {
-        url: '/list',
+        url: '/base/list',
         controller: 'listCtrl',
         templateUrl: 'tpls/list.html'
     }).state('chart',
         {
-            url: '/chart',
+            url: '/base/chart',
             controller: 'chartCtrl',
             templateUrl: 'tpls/chart.html'
+        }
+    ).state('heihei',
+        {
+            url: '/other/heihei',
+            template: '<span>heihei</span>'
+        }
+    ).state('hehe',
+        {
+            url: '/other/hehe',
+            template: '<span>hehe</span>'
         }
     )
 }]);

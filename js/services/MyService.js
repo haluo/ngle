@@ -36,6 +36,10 @@ service.constant('USER_ROLES', {
     editor: 'editor',
     guest: 'guest'
 });
+service.constant('MENUS', {
+    base: {isOpen:false},
+    other: {isOpen:false}
+});
 //session保存登录用户
 service.service('Session', function () {
     this.create = function (sessionId, userId, userRole) {

@@ -35,17 +35,40 @@
 <login-show></login-show>
 <div >
 	<div class="row">
-		<div class="col-md-2">
-			<div class="list-group">
-				<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/home')}">home</a>
-				<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/list')}">列表</a>
-				<a ui-sref="chart" class="list-group-item" ng-class="{active:urlActive('/chart')}">图表</a>
+		<!--<div class="col-md-2">-->
+			<!--<div class="list-group">-->
+				<!--<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/home')}">home</a>-->
+				<!--<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/list')}">列表</a>-->
+				<!--<a ui-sref="chart" class="list-group-item" ng-class="{active:urlActive('/chart')}">图表</a>-->
+				<!--<a ui-sref="menu" class="list-group-item" ng-class="{active:urlActive('/menu')}">菜单</a>-->
+			<!--</div>-->
+		<!--</div>-->
+		<uib-accordion  class="col-md-2" close-others="true">
+			<div uib-accordion-group class="panel-default" is-open="menu.base.isOpen">
+				<uib-accordion-heading>
+					<div class="menu">基础&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': menu.base.isOpen, 'glyphicon-chevron-right': !menu.base.isOpen}"></i>
+					</div>
+				</uib-accordion-heading>
+				<div class="list-group">
+					<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/base/home')}">home</a>
+					<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/base/list')}">列表</a>
+					<a ui-sref="chart" class="list-group-item" ng-class="{active:urlActive('/base/chart')}">图表</a>
+				</div>
 			</div>
-		</div>
-		<div ui-view=""></div>
+			<div uib-accordion-group class="panel-default"  is-open="menu.other.isOpen" >
+				<uib-accordion-heading>
+					<div class="menu">其他&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': menu.other.isOpen, 'glyphicon-chevron-right': !menu.other.isOpen}"></i>
+					</div>
+				</uib-accordion-heading>
+				<div class="list-group">
+					<a ui-sref="heihei" class="list-group-item" ng-class="{active:urlActive('/other/heihei')}">heihei</a>
+					<a ui-sref="hehe" class="list-group-item" ng-class="{active:urlActive('/other/hehe')}">hehe</a>
+				</div>
+			</div>
+		</uib-accordion>
+		<div class="col-md-10" ui-view=""></div>
 	</div>
 </div>
-
 <!-外部依赖->
 <script src="lib/angular/angular.min.js"></script>
 <script src="lib/angular-cookies/angular-cookies.min.js"></script>

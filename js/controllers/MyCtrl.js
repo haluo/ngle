@@ -13,7 +13,7 @@ function padInt2Str(num, size) {
 }
 
 //全局 防止污染rootscope
-app.controller("ApplicationController",function($scope,USER_ROLES,AUTH_EVENTS,loginService,$location){
+app.controller("ApplicationController",function($scope,USER_ROLES,MENUS,AUTH_EVENTS,loginService,$location){
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = loginService.isAuthorized;
     $scope.isLogin = loginService.isLogin;
@@ -21,7 +21,8 @@ app.controller("ApplicationController",function($scope,USER_ROLES,AUTH_EVENTS,lo
     $scope.logout = loginService.logout;
     $scope.urlActive = function (url){
         return url === $location.path();
-    }
+    };
+    $scope.menu = MENUS;
     $scope.login = function(){
         $scope.$broadcast(AUTH_EVENTS.notLogin,"list")
     }
@@ -198,8 +199,6 @@ app.controller("chartCtrl",function($scope,$timeout){
                 dataArray.shift();
             }
             dataArray.push({x: new Date(), y: Math.floor(Math.random()*20)});
-            console.log(dataArray);
-
             $scope.chartConfig2.series[0].data = dataArray;
             $timeout.cancel(timer);
             timerF();
@@ -215,4 +214,3 @@ app.controller("chartCtrl",function($scope,$timeout){
 
 
 });
-
