@@ -6,6 +6,11 @@
 
 var app = angular.module("myApp.myCtrl",[]);
 
+function padInt2Str(num, size) {
+    var s = num + "";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
 
 //全局 防止污染rootscope
 app.controller("ApplicationController",function($scope,USER_ROLES,AUTH_EVENTS,loginService,$location){
@@ -42,7 +47,7 @@ app.controller("listCtrl",function($scope,$log,listService){
         $scope.pager = listService.getData($scope.pager.currentPage,$scope.pager.numPerPage);
     };
 });
-app.controller("chartCtrl",function($scope){
+app.controller("chartCtrl",function($scope,$timeout){
     $scope.addPoints = function () {
         var seriesArray = $scope.chartConfig.series;
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
@@ -72,7 +77,6 @@ app.controller("chartCtrl",function($scope){
             this.chartConfig.options.chart.type = 'line'
         }
     };
-
     $scope.chartConfig = {
 
         options: {
@@ -122,5 +126,93 @@ app.controller("chartCtrl",function($scope){
             //setup some logic for the chart
         }
     };
+
+    $scope.chartConfig2 = {
+
+        options: {
+            chart: {
+                type: 'line'
+            },
+            tooltip: {
+                style: {
+                    padding: 10,
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        //The below properties are watched separately for changes.
+
+        //Series object (optional) - a list of series using normal Highcharts series options.
+        series: [{
+            name: 'OP/s',
+            data: []
+        }],
+        //Title configuration (optional)
+        title: {
+            text: 'OPS'
+        },
+        loading: false,
+        xAxis: {
+            title: {
+                style: {
+                    display: 'none',
+                }
+            },
+            labels: {
+                formatter: function () {
+                    var d = new Date(this.value);
+                    return padInt2Str(d.getHours(), 2) + ":" + padInt2Str(d.getMinutes(), 2) + ":" + padInt2Str(d.getSeconds(), 2);
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                style: {
+                    display: 'none',
+                }
+            },
+        },
+        useHighStocks: false,
+        size: {
+            width: 400,
+            height: 300
+        },
+        credits: {
+            text:"",
+            href:""
+        },
+        //function (optional)
+        func: function (chart) {
+            //setup some logic for the chart
+        }
+    };
+
+
+
+    var timer;
+    var timerF = function(){
+        timer = $timeout(function(){
+            var dataArray = $scope.chartConfig2.series[0].data;
+
+            if(dataArray.length==20){
+                dataArray.shift();
+            }
+            dataArray.push({x: new Date(), y: Math.floor(Math.random()*20)});
+            console.log(dataArray);
+
+            $scope.chartConfig2.series[0].data = dataArray;
+            $timeout.cancel(timer);
+            timerF();
+        },500);
+    };
+    timerF();
+    $scope.$on(
+        "$destroy",
+        function( event ) {
+            $timeout.cancel( timer );
+        }
+    );
+
+
 });
 
