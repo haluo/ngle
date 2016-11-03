@@ -18,22 +18,22 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><font class="menu">angular test</font></a>
+			<a class="navbar-brand" ui-sref="index"><font class="menu">angular test</font></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<p ng-show="isLogin()" class="navbar-text">hi ~ {{getCurrentUser().id}}</p>
-				<li><a ng-show="!isLogin()" ng-click="login()">登陆</a></li>
-				<li><a ng-show="!isLogin()" ng-sref="reg">注册</a></li>
-				<li><a ng-show="isLogin()" ng-click="logout()">退出</a></li>
+				<li><a ng-show="!isLogin()" ng-click="login()" href="#">登陆</a></li>
+				<li><a ng-show="!isLogin()" ui-sref="reg">注册</a></li>
+				<li><a ng-show="isLogin()" ui-sref="home">Home</a></li>
+				<li><a ng-show="isLogin()" ng-click="logout()" href="#">退出</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
 
 <login-show></login-show>
-<div >
 	<div class="row">
 		<!--<div class="col-md-2">-->
 			<!--<div class="list-group">-->
@@ -50,7 +50,6 @@
 					</div>
 				</uib-accordion-heading>
 				<div class="list-group">
-					<a ui-sref="home" class="list-group-item" ng-class="{active:urlActive('/base/home')}">home</a>
 					<a ui-sref="list" class="list-group-item" ng-class="{active:urlActive('/base/list')}">列表</a>
 					<a ui-sref="chart" class="list-group-item" ng-class="{active:urlActive('/base/chart')}">图表</a>
 				</div>
@@ -68,7 +67,8 @@
 		</uib-accordion>
 		<div class="col-md-10" ui-view=""></div>
 	</div>
-</div>
+
+
 <!-外部依赖->
 <script src="lib/angular/angular.min.js"></script>
 <script src="lib/angular-cookies/angular-cookies.min.js"></script>
@@ -84,4 +84,5 @@
 <script src="js/services/MyService.js"></script>
 <script src="js/directives/MyDirective.js"></script>
 </body>
+
 </html>

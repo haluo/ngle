@@ -1,5 +1,23 @@
-<div ng-controller="listCtrl">
-    <div class="app-content">
+<div class="page-content">
+        <form class="form-horizontal page-head" role="form">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">姓名</label>
+                <div class="col-sm-2">
+                    <input type="email" class="form-control" placeholder="姓名">
+                </div>
+                <label  class="col-sm-1 control-label">年龄</label>
+                <div class="col-sm-2">
+                    <input type="password" class="form-control"  placeholder="年龄">
+                </div>
+                <label  class="col-sm-1 control-label">学历</label>
+                <div class="col-sm-2">
+                    <input type="password" class="form-control"  placeholder="学历">
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-xs btn-primary">刷新</button>
+                </div>
+            </div>
+        </form>
         <table class="table  table-condensed ">
             <thead>
             <th>
@@ -20,7 +38,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="content-foot">
+        <div class="page-foot">
             <ul uib-pagination total-items="pager.totalItems" ng-change="pageChanged()"
                 items-per-page="pager.numPerPage" ng-model="pager.currentPage"
                 max-size="6" class="pagination-sm" boundary-links="true" num-pages="numPages" first-text="首页"
@@ -28,5 +46,4 @@
             </ul>
         </div>
     </div>
-</div>
 </div>

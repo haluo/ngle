@@ -34,7 +34,7 @@ myDirective.directive('loginShow',function($rootScope,$state,$uibModal,AUTH_EVEN
                    ariaDescribedBy: 'modal-body',
                    templateUrl: 'myModalContent.html',
                    controller : 'loginModalCtrl',
-                   size:'sm'
+                   size:'md'
                });
 
                modalInstance.result.then(function (user) {

@@ -31,10 +31,15 @@ myApp.run(function ($rootScope, AUTH_EVENTS,MENUS, loginService) {
 
 
 myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($stateProvider, $urlRouterProvider, USER_ROLES) {
-    $urlRouterProvider.otherwise('/base/list');
-    $stateProvider.state('home',
+    $urlRouterProvider.otherwise('index');
+    $stateProvider.state('index',
         {
-            url: '/base/home',
+            url: '/index',
+            template: '<div class="page-content">it is index</div>'
+        }
+    ).state('home',
+        {
+            url: '/home',
             controller: 'homeCtrl',
             templateUrl: 'tpls/home.html',
             data: {
@@ -54,12 +59,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', function ($s
     ).state('heihei',
         {
             url: '/other/heihei',
-            template: '<span>heihei</span>'
+            template: '<div class="page-content">heihei</div>'
         }
     ).state('hehe',
         {
             url: '/other/hehe',
-            template: '<span>hehe</span>'
+            template: '<div class="page-content">hehe</div>'
         }
     )
 }]);
