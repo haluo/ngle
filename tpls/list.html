@@ -1,6 +1,6 @@
-<div ng-controller="listCtrl" class="row">
-    <div class="col-md-9">
-        <table class="table  table-condensed">
+<div ng-controller="listCtrl">
+    <div class="app-content">
+        <table class="table  table-condensed ">
             <thead>
             <th>
                 姓名
@@ -20,14 +20,12 @@
             </tr>
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-md-offset-4">
-                <ul uib-pagination total-items="pager.totalItems" ng-change="pageChanged()"
-                    items-per-page="pager.numPerPage" ng-model="pager.currentPage"
-                    max-size="6" class="pagination-sm" boundary-links="true" num-pages="numPages" first-text="首页"
-                    last-text="末页" previous-text="上一页" next-text="下一页">
-                </ul>
-            </div>
+        <div class="content-foot">
+            <ul uib-pagination total-items="pager.totalItems" ng-change="pageChanged()"
+                items-per-page="pager.numPerPage" ng-model="pager.currentPage"
+                max-size="6" class="pagination-sm" boundary-links="true" num-pages="numPages" first-text="首页"
+                last-text="末页" previous-text="上一页" next-text="下一页">
+            </ul>
         </div>
     </div>
 </div>

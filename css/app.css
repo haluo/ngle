@@ -1,7 +1,22 @@
 /* app css stylesheet */
-
+html,body{
+    height:100%;
+}
+div{
+    margin: 0px;
+}
 .menu {
     color:#2b669a;
 }
 
+.app-content{
+    min-height:400px;
+    margin: 20px 40px 70px 20px ;
+}
+.content-foot{
+    position:absolute;right:200px;bottom:0px;
+}
+.content-foot{
+    margin-bottom: 0;
+}
 
